@@ -126,15 +126,7 @@ class JadwalKuliahController extends Controller
      */
     public function show($id)
     {
-        $jadwalkuliah = JadwalKuliah::all();
-        $ruangan = Ruangan::all();
-        $kelas = Kelas::all();
-        $dosen = User::all();
-        $matakuliah = MataKuliah::all();
-        $absen = AbsenMahasiswa::all();
-        $data['title'] = 'Manajemen Jadwal Kuliah';
-        $data['desc'] = 'Fitur Melihat Jadwal';
-        return view('developer.absen.index',$data ,compact('dosen', 'jadwalkuliah','ruangan','kelas', 'matakuliah'));
+        // 
     }
 
     /**
