@@ -122,4 +122,5 @@ Route::middleware(['auth', 'user-access:Developer'])->group(function () {
     Route::resource('/developer/absenmahasiswa', App\Http\Controllers\Developer\AbsenMahasiswaController::class);
 
     Route::get('/developer/absen/{jadwalkuliah:slug}', [App\Http\Controllers\Developer\JadwalKuliahController::class, 'absen'])->name('index');
+    // Route::get('/developer/absen/{jadwalkuliah:slug}', [App\Http\Controllers\Developer\JadwalKuliahController::class, 'absen'])->name('index');
 });

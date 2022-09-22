@@ -3,7 +3,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h4>Data Mahasiswa Setiap Prodi</h4>
+        <h4>Data Jadwal Kuliah Berdasarkan Prodi</h4>
     </div>
     <div class="card-body">
         <div class="row">
