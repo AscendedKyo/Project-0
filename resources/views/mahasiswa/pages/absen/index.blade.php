@@ -25,22 +25,12 @@
               <p>1. Absen hanya bisa diakses selama jam mulai perkuliahan sampai dengan selesainya.</p>
               <p>2. Mahasiswa diperkenankan absen melalui web ini dengan memilih kolom absen dan upload bukti hadir pada saat tatap muka maupun teleconference.</p>
               <p>3. Mahasiswa diperkenankan upload bukti hadir pada saat berada dikelas dan untuk perkuliahan teleconference dengan cara ScreenShot layar ketika dosen sedang menjelaskan materi.</p>
+              <p>{{ $limiterdate }}</p>
             </div>
           </div>
         </div>
       </div>
-      @if($limiterdate = $now->toDateString() && $limiterstart > $now->toTimeString() && $limiterend > $now->toTimeString())
-      <div class="card mb-4">
-        <h5 class="card-header">Absen</h5>
-        <!-- Account -->
-        <div class="card-body">
-          <!-- <form id="formAccountSettings" method="POST" onsubmit="return false"> -->
-            <h5>Absen Saat Ini Tidak Tersedia</h5>
-            <!-- </form> -->
-        </div>
-        <!-- /Account -->
-      </div>
-      @else
+      @if($limiterdate = $now->toDateString() && $limiterstart < $now->toTimeString() && $limiterend < $now->toTimeString())
       <div class="card mb-4">
         <h5 class="card-header">Absen</h5>
         <!-- Account -->
@@ -113,6 +103,14 @@
                         </select> 
                       </div>
                         <div class="mb-3 col-md-6 divider divider-left">
+                          <label for="Tanggal Perkuliahan" class="form-label divider-text">Tanggal Perkuliahan</label>
+                          <input type="date" class="form-control" name="tanggal_perkuliahan">
+                        </div>
+                        <div class="mb-3 col-md-6 divider divider-left">
+                          <label for="Waktu Absen" class="form-label divider-text">Waktu Absen</label>
+                          <input type="time" class="form-control" value="{{ $now->toTimeString() }}" name="waktu_absen">
+                        </div>
+                        <div class="mb-3 col-md-6 divider divider-left">
                           <label for="absen" class="form-label divider-text">Absen</label>
                           <select name="absen" id="absen" class="select2 form-select">
                               <option selected value="">Keterangan Absen</option>
@@ -121,6 +119,7 @@
                               <option value="Izin">Izin</option>
                           </select> 
                         </div>
+
                         <div class="mb-3 col-md-6 divider divider-left">
                           <label for="bukti" class="form-label divider-text">Bukti</label>
                           <input type="file" class="form-control" name="bukti">
@@ -132,6 +131,17 @@
               <button type="reset" class="btn btn-outline-secondary">Cancel</button>
             </div>
           <!-- </form> -->
+        </div>
+        <!-- /Account -->
+      </div>
+      @else
+      <div class="card mb-4">
+        <h5 class="card-header">Absen</h5>
+        <!-- Account -->
+        <div class="card-body">
+          <!-- <form id="formAccountSettings" method="POST" onsubmit="return false"> -->
+            <h5>Absen Saat Ini Tidak Tersedia</h5>
+            <!-- </form> -->
         </div>
         <!-- /Account -->
       </div>

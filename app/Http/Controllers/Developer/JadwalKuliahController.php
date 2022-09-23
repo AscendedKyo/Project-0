@@ -54,22 +54,24 @@ class JadwalKuliahController extends Controller
         $ruangan = Ruangan::all();
         $kelas = Kelas::all();
         $dosen = User::all();
-        $absensi = AbsenMahasiswa::All();
+        $absensi = AbsenMahasiswa::all();
         $matakuliah = MataKuliah::all();
+        $jk_matkul = JadwalKuliah::select('matakuliah_id')->orderBy('matakuliah_id', 'asc')->first();
+        $jk_pertemuan = JadwalKuliah::select('pertemuan')->orderBy('pertemuan', 'asc')->first();
+        $am_matkul = AbsenMahasiswa::select('matakuliah_id')->orderBy('matakuliah_id', 'asc')->first();
+        $am_pertemuan = AbsenMahasiswa::select('pertemuan')->orderBy('pertemuan', 'asc')->first();
+        // $absentime = AbsenMahasiswa::select('waktu_absen')->orderBy('waktu_absen', 'desc')->first();
+        // $limiterstart = DB::table('jadwal_kuliah')->select('jam_mulai')->latest()->get();
+        // $limiterend = DB::table('jadwal_kuliah')->select('jam_selesai')->latest()->get();
         $data = [
             "title" => "Manajemen Jadwal Kuliah",
             "subtitle" => "Fitur untuk mengatur jadwal kuliah",
             "menu" => "Jadwal Kuliah",
             "submenu" => "Index",
-            "ti"  => JadwalKuliah::where('prodi_id', 'like', '1')->get(),
-            "si"  => JadwalKuliah::where('prodi_id', 'like', '2')->get(),
-            "rpl" => JadwalKuliah::where('prodi_id', 'like', '3')->get(),
-            "mi"  => JadwalKuliah::where('prodi_id', 'like', '4')->get(),
-            "ka"  => JadwalKuliah::where('prodi_id', 'like', '5')->get(),
         ];
         $data['title'] = 'Manajemen Jadwal Kuliah';
         $data['desc'] = 'Fitur Melihat Jadwal';
-        return view('developer.jadwalkuliah.absen.index',$data ,compact('dosen','absensi' , 'jadwalkuliah','ruangan','kelas', 'matakuliah'));
+        return view('developer.jadwalkuliah.absen.index',$data ,compact('dosen','absensi' ,'jk_matkul', 'jk_pertemuan','am_matkul', 'am_pertemuan'  , 'jadwalkuliah','ruangan','kelas', 'matakuliah'));
     }
 
     /**
@@ -136,6 +138,7 @@ class JadwalKuliahController extends Controller
         $prodi = Prodi::all();
         $dosen = User::all();
         $matakuliah = MataKuliah::all();
+        // $ti = AbsenMahasiswa::where('nama', 'like', 'Teknik Informatika')->with('matakuliah.pertemuan')->get();
         // $absen = AbsenMahasiswa::all();
         return view('developer.jadwalkuliah.absen.show', compact('dosen','prodi', 'absen', 'jadwalkuliah','ruangan','kelas', 'matakuliah'), $data);
     }

@@ -17,11 +17,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('prodi_id');
             $table->foreignId('kelas_id');
+            $table->foreignId('matakuliah_id');
             $table->foreignId('mahasiswa_id');
+            $table->string('pertemuan')->nullable();
             $table->string('absen')->nullable();
-            $table->string('bukti_hadir')->nullable();
-            $table->string('bukti_sakit')->nullable();
-            $table->string('bukti_izin')->nullable();
+            $table->string('bukti')->nullable();
+            $table->date('tanggal_perkuliahan');
+            $table->time('waktu_absen');
             $table->timestamps();
         });
     }

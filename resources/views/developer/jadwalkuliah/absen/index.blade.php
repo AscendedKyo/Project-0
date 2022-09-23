@@ -1,7 +1,6 @@
 @extends('developer.mazer.panel')
 
 @section('content')
-      
 <div class="card">
     <div class="card-header">
         <h4>@yield('title', $title)</h4>
@@ -10,19 +9,21 @@
         <table class="table table-striped" id="table1">
             <thead>
                 <tr>
-                  <th>#</th>
-                  <th>Prodi</th>
-                  <th>Kelas</th>
-                  <th>Mata Kuliah</th>
-                  <th>Pertemuan</th>
-                  <th>Nama Lengkap</th>
-                  <th>Absen</th>
-                  <th>Waktu Absen</th>
-                  <th>Status</th>
+                    <th>#</th>
+                    <th>Prodi</th>
+                    <th>Kelas</th>
+                    <th>Mata Kuliah</th>
+                    <th>Pertemuan</th>
+                    <th>Tanggal Perkuliahan</th>
+                    <th>Nama Lengkap</th>
+                    <th>Absen</th>
+                    <th>Waktu Absen</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody>
                 <?php $no = 1 ?>
+                @if($jk_matkul = $am_matkul && $jk_pertemuan = $am_pertemuan)      
                 @foreach ($absensi as $key => $item)
                 <tr>
                     <td>{{ ++$key }}</td>
@@ -30,9 +31,10 @@
                     <td>{{ $item->kelas->nama_kelas }}</td>
                     <td>{{ $item->matakuliah->nama_matakuliah }}</td>
                     <td>{{ $item->pertemuan }}</td>
+                    <td>{{ $item->tanggal_perkuliahan }}</td>
                     <td>{{ $item->mahasiswa->name }}</td>
                     <td>{{ $item->absen }}</td>
-                    <td>{{ $item->created_at }}</td>
+                    <td>{{ $item->waktu_absen }}</td>
                     <td>
                             <div class="table-links">
                               <a class="btn btn-sm btn-outline-info" href="{{route('jadwalkuliah.show', [$item->id])}}"><i class="fas fa-eye"></i> View</a>
@@ -44,9 +46,12 @@
                                 <!-- <input type="submit" value="Trash" class="btn btn-sm btn-outline-danger"> -->
                               </form>
                             </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
                 @endforeach
+                @else
+                <p>Bye</p>
+                @endif
             </tbody>
         </table>
     </div>

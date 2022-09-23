@@ -46,9 +46,10 @@ class MahasiswaController extends Controller
         $kelas = Kelas::all();
         $now = Carbon::now();
         $absenmahasiswa = AbsenMahasiswa::all();
-        $limiterdate = DB::table('jadwal_kuliah')->select('tanggal')->latest()->get();
-        $limiterstart = DB::table('jadwal_kuliah')->select('jam_mulai')->latest()->get();
-        $limiterend = DB::table('jadwal_kuliah')->select('jam_selesai')->latest()->get();
+        // $limiterdate = DB::table('jadwal_kuliah')->select('tanggal')->orderBy('tanggal', 'desc')->first();
+        $limiterdate = JadwalKuliah::select('tanggal')->orderBy('tanggal', 'desc')->first();
+        $limiterstart = DB::table('jadwal_kuliah')->select('jam_mulai')->get();
+        $limiterend = DB::table('jadwal_kuliah')->select('jam_selesai')->get();
         $jadwalkuliah = JadwalKuliah::all();
         $matakuliah = MataKuliah::all();
         $data['title'] = 'Dashboard';
@@ -171,6 +172,8 @@ class MahasiswaController extends Controller
         $absen->matakuliah_id       = $request->matakuliah_id;
         $absen->pertemuan           = $request->pertemuan;
         $absen->absen               = $request->absen;
+        $absen->tanggal_perkuliahan = $request->tanggal_perkuliahan;
+        $absen->waktu_absen         = $request->waktu_absen;
         $absen->save();
 
 
