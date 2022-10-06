@@ -45,6 +45,7 @@ class KelasController extends Controller
     {
         $kelas = new Kelas();
         $kelas->nama_kelas = $request->nama_kelas;
+        $kelas->slug = \Str::slug($request->nama_kelas);
         $kelas->kode_kelas = $request->kode_kelas;
         $kelas->save();
 

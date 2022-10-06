@@ -48,6 +48,7 @@
                     <td>{{ $item->isActive }}</td>
                     <td>
                             <div class="table-links">
+                              <a class="btn btn-sm btn-outline-primary" href="{{ route('ruangan.show', $item->id) }}"><i class="fas fa-edit"></i> Daftar Inventaris</a>
                               <a class="btn btn-sm btn-outline-primary" href="{{ route('ruangan.edit', $item->id) }}"><i class="fas fa-edit"></i> Edit</a>
                               <form method="POST" action="{{route('ruangan.destroy', [$item->id])}}" class="d-inline">
                                 @csrf

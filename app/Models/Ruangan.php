@@ -17,17 +17,17 @@ class Ruangan extends Model
     protected function isActive(): Attribute
     {
         return new Attribute(
-            get: fn ($value) =>  ["Tidak Digunakan", "Sedang Digunakan"][$value],
+            get: fn ($value) => ["Tidak Digunakan", "Sedang Digunakan"][$value],
         );
     }
 
-    public function inventaris_ruangan()
+    public function inventaris()
     {
-        return $this->hasMany(InventarisRuangan::class);
+        return $this->has_many(Inventaris::class);
     }
     
-    public function inventaris_barang()
+    public function gedung()
     {
-        return $this->hasMany(InventarisBarang::class);
+        return $this->belongsTo(Gedung::class);
     }
 }

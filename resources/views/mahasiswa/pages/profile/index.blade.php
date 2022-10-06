@@ -124,7 +124,7 @@
                           <select name="prodi_id" id="prodi_id" class="select2 form-select">
                               @if(Auth::guard('mahasiswa')->user()->prodi_id == '0')
                               <option selected value="">Pilih Program Studi</option>
-                              @foreach ($prodi as $prody)
+                              @foreach($prodi as $prody)
                               <option value="{{ $prody->id }}">{{ $prody->nama_prodi }}</option>
                               @endforeach
                               @else
@@ -133,17 +133,12 @@
                           </select>   
                         </div>
                         <div class="mb-3 col-md-6 divider divider-left">
-                          <label for="kelas_id" class="form-label divider-text">Kelas</label>
-                          <select name="kelas_id" id="kelas_id" class="select2 form-select">
-                              @if(Auth::guard('mahasiswa')->user()->kelas_id == '0')
-                              <option value="" selected>Pilih Kelas</option>
-                              @foreach ($kelas as $class)
-                              <option value="{{ $class->id }}">{{ $class->nama_kelas }}</option>
-                              @endforeach
-                              @else
-                              <option selected value="{{ Auth::guard('mahasiswa')->user()->kelas->id }}">{{ Auth::guard('mahasiswa')->user()->kelas->nama_kelas }}</option>
-                              @endif
-                          </select>            
+                          <label for="kelas[]" class="form-label divider-text">Kelas</label>
+                          <select name="kelas[]" id="kelas[]" class="form-select select2 @error('kelas') is-invalid @enderror">
+                            @foreach($mahasiswas->kelas as $kelas)
+                            <option selected value="">{{ $kelas->nama_kelas }}</option>
+                            @endforeach
+                          </select>           
                         </div>
                     </div>
                 </div>

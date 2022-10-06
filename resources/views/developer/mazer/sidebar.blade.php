@@ -44,10 +44,10 @@
                         <a href="{{ url('/developer/ruangan') }}">Data Ruangan</a>
                     </li>
                     <li class="submenu-item ">
-                        <a href="{{ url('/developer/ruangan') }}">Data Inventaris Ruangan</a>
+                        <a href="{{ url('/developer/inventaris-ruangan') }}">Data Inventaris Ruangan</a>
                     </li>
                     <li class="submenu-item ">
-                        <a href="{{ url('/developer/ruangan') }}">Data Inventaris Barang</a>
+                        <a href="{{ url('/developer/inventaris-barang') }}">Data Inventaris Barang</a>
                     </li>
                 </ul>
             </li>

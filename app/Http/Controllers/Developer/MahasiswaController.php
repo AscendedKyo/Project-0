@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Auth;
 
 
 class MahasiswaController extends Controller
@@ -25,11 +26,14 @@ class MahasiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Kelas $kelas)
     {
-        $mahasiswa = Mahasiswa::all();
+        $mahasiswas = Mahasiswa::all();
+        $mahasiswa = Mahasiswa::find(Auth::id());
         $prodi = Prodi::all();
         $kelas = Kelas::all();
+        // $mahasiswas = $kelas->mahasiswas()->get();
+        // $posts = $tag->posts()->latest()->get();
         $ti = Mahasiswa::where('prodi_id', 'like', '1')->get();
         $si = Mahasiswa::where('prodi_id', 'like', '2')->get();
         $rpl = Mahasiswa::where('prodi_id', 'like', '3')->get();
@@ -37,88 +41,89 @@ class MahasiswaController extends Controller
         $ka = Mahasiswa::where('prodi_id', 'like', '5')->get();
         $data['title'] = 'Manajemen Mahasiswa';
         $data['desc'] = 'Fitur Untuk Memanajemen Mahasiswa';
-        return view('developer.mahasiswa.index',$data ,compact('mahasiswa','ti','si','mi','ka','rpl','prodi','kelas'));
+        return view('developer.mahasiswa.index',$data ,compact('mahasiswas', 'mahasiswa','ti','si','mi','ka','rpl','prodi','kelas'));
     }
     
-    public function teknikinformatika()
-    {
-        $mahasiswa = Mahasiswa::all();
-        $prodi = Prodi::all();
-        $kelas = Kelas::all();
-        $ti = Mahasiswa::where('prodi_id', 'like', '1')->get();
-        $si = Mahasiswa::where('prodi_id', 'like', '2')->get();
-        $rpl = Mahasiswa::where('prodi_id', 'like', '3')->get();
-        $mi = Mahasiswa::where('prodi_id', 'like', '4')->get();
-        $ka = Mahasiswa::where('prodi_id', 'like', '5')->get();
-        $data['title'] = 'Manajemen Mahasiswa Prodi Teknik Informatika';
-        $data['desc'] = 'Fitur Untuk Memanajemen Mahasiswa Prodi Teknik Informatika';
-        return view('developer.mahasiswa.ti',$data ,compact('mahasiswa','ti','si','rpl','mi','ka','prodi','kelas'));
-        // echo "Halo !";
-    }
+    // public function teknikinformatika()
+    // {
+    //     $mahasiswa = Mahasiswa::all();
+    //     $prodi = Prodi::all();
+    //     $kelas = Kelas::all();
+    //     $ti = Mahasiswa::where('prodi_id', 'like', '1')->get();
+    //     $si = Mahasiswa::where('prodi_id', 'like', '2')->get();
+    //     $rpl = Mahasiswa::where('prodi_id', 'like', '3')->get();
+    //     $mi = Mahasiswa::where('prodi_id', 'like', '4')->get();
+    //     $ka = Mahasiswa::where('prodi_id', 'like', '5')->get();
+    //     $data['title'] = 'Manajemen Mahasiswa Prodi Teknik Informatika';
+    //     $data['desc'] = 'Fitur Untuk Memanajemen Mahasiswa Prodi Teknik Informatika';
+    //     return view('developer.mahasiswa.ti',$data ,compact('mahasiswa','ti','si','rpl','mi','ka','prodi','kelas'));
+    //     // echo "Halo !";
+    // }
 
-    public function rekayasaperangkatlunak()
-    {
-        $mahasiswa = Mahasiswa::all();
-        $prodi = Prodi::all();
-        $kelas = Kelas::all();
-        $ti = Mahasiswa::where('prodi_id', 'like', '1')->get();
-        $si = Mahasiswa::where('prodi_id', 'like', '2')->get();
-        $rpl = Mahasiswa::where('prodi_id', 'like', '3')->get();
-        $mi = Mahasiswa::where('prodi_id', 'like', '4')->get();
-        $ka = Mahasiswa::where('prodi_id', 'like', '5')->get();
-        $data['title'] = 'Manajemen Mahasiswa Prodi Rekayasa Perangkat Lunak';
-        $data['desc'] = 'Fitur Untuk Memanajemen Mahasiswa Prodi Rekayasa Perangkat Lunak';
-        return view('developer.mahasiswa.rpl',$data ,compact('mahasiswa','ti','si','rpl','mi','ka','prodi','kelas'));
-        // echo "Halo !";
-    }
+    // public function rekayasaperangkatlunak()
+    // {
+    //     $mahasiswa = Mahasiswa::all();
+    //     $prodi = Prodi::all();
+    //     $kelas = Kelas::all();
+    //     $ti = Mahasiswa::where('prodi_id', 'like', '1')->get();
+    //     $si = Mahasiswa::where('prodi_id', 'like', '2')->get();
+    //     $rpl = Mahasiswa::where('prodi_id', 'like', '3')->get();
+    //     $mi = Mahasiswa::where('prodi_id', 'like', '4')->get();
+    //     $ka = Mahasiswa::where('prodi_id', 'like', '5')->get();
+    //     $data['title'] = 'Manajemen Mahasiswa Prodi Rekayasa Perangkat Lunak';
+    //     $data['desc'] = 'Fitur Untuk Memanajemen Mahasiswa Prodi Rekayasa Perangkat Lunak';
+    //     return view('developer.mahasiswa.rpl',$data ,compact('mahasiswa','ti','si','rpl','mi','ka','prodi','kelas'));
+    //     // echo "Halo !";
+    // }
 
-    public function manajemeninformasi()
-    {
-        $mahasiswa = Mahasiswa::all();
-        $prodi = Prodi::all();
-        $kelas = Kelas::all();
-        $ti = Mahasiswa::where('prodi_id', 'like', '1')->get();
-        $si = Mahasiswa::where('prodi_id', 'like', '2')->get();
-        $rpl = Mahasiswa::where('prodi_id', 'like', '3')->get();
-        $mi = Mahasiswa::where('prodi_id', 'like', '4')->get();
-        $ka = Mahasiswa::where('prodi_id', 'like', '5')->get();
-        $data['title'] = 'Manajemen Mahasiswa Prodi Manajemen Informasi';
-        $data['desc'] = 'Fitur Untuk Memanajemen Mahasiswa Prodi Manajemen Informasi';
-        return view('developer.mahasiswa.mi',$data ,compact('mahasiswa','ti','si','rpl','mi','ka','prodi','kelas'));
-        // echo "Halo !";
-    }
+    // public function manajemeninformasi()
+    // {
+    //     $mahasiswa = Mahasiswa::all();
+    //     $prodi = Prodi::all();
+    //     $kelas = Kelas::all();
+    //     $ti = Mahasiswa::where('prodi_id', 'like', '1')->get();
+    //     $si = Mahasiswa::where('prodi_id', 'like', '2')->get();
+    //     $rpl = Mahasiswa::where('prodi_id', 'like', '3')->get();
+    //     $mi = Mahasiswa::where('prodi_id', 'like', '4')->get();
+    //     $ka = Mahasiswa::where('prodi_id', 'like', '5')->get();
+    //     $data['title'] = 'Manajemen Mahasiswa Prodi Manajemen Informasi';
+    //     $data['desc'] = 'Fitur Untuk Memanajemen Mahasiswa Prodi Manajemen Informasi';
+    //     return view('developer.mahasiswa.mi',$data ,compact('mahasiswa','ti','si','rpl','mi','ka','prodi','kelas'));
+    //     // echo "Halo !";
+    // }
 
-    public function komputerisasiakuntansi()
-    {
-        $mahasiswa = Mahasiswa::all();
-        $prodi = Prodi::all();
-        $kelas = Kelas::all();
-        $ti = Mahasiswa::where('prodi_id', 'like', '1')->get();
-        $si = Mahasiswa::where('prodi_id', 'like', '2')->get();
-        $rpl = Mahasiswa::where('prodi_id', 'like', '3')->get();
-        $mi = Mahasiswa::where('prodi_id', 'like', '4')->get();
-        $ka = Mahasiswa::where('prodi_id', 'like', '5')->get();
-        $data['title'] = 'Manajemen Mahasiswa Prodi Komputerisasi Akuntansi';
-        $data['desc'] = 'Fitur Untuk Memanajemen Mahasiswa Prodi Komputerisasi Akuntansi';
-        return view('developer.mahasiswa.ka',$data ,compact('mahasiswa','ti','si','rpl','mi','ka','prodi','kelas'));
-        // echo "Halo !";
-    }
+    // public function komputerisasiakuntansi()
+    // {
+    //     $mahasiswa = Mahasiswa::all();
+    //     $prodi = Prodi::all();
+    //     $kelas = Kelas::all();
+    //     $ti = Mahasiswa::where('prodi_id', 'like', '1')->get();
+    //     $si = Mahasiswa::where('prodi_id', 'like', '2')->get();
+    //     $rpl = Mahasiswa::where('prodi_id', 'like', '3')->get();
+    //     $mi = Mahasiswa::where('prodi_id', 'like', '4')->get();
+    //     $ka = Mahasiswa::where('prodi_id', 'like', '5')->get();
+    //     $data['title'] = 'Manajemen Mahasiswa Prodi Komputerisasi Akuntansi';
+    //     $data['desc'] = 'Fitur Untuk Memanajemen Mahasiswa Prodi Komputerisasi Akuntansi';
+    //     return view('developer.mahasiswa.ka',$data ,compact('mahasiswa','ti','si','rpl','mi','ka','prodi','kelas'));
+    //     // echo "Halo !";
+    // }
 
-    public function sisteminformasi()
-    {
-        $mahasiswa = Mahasiswa::all();
-        $prodi = Prodi::all();
-        $kelas = Kelas::all();
-        $ti = Mahasiswa::where('prodi_id', 'like', '1')->get();
-        $si = Mahasiswa::where('prodi_id', 'like', '2')->get();
-        $rpl = Mahasiswa::where('prodi_id', 'like', '3')->get();
-        $mi = Mahasiswa::where('prodi_id', 'like', '4')->get();
-        $ka = Mahasiswa::where('prodi_id', 'like', '5')->get();
-        $data['title'] = 'Manajemen Mahasiswa Prodi Sistem Informasi';
-        $data['desc'] = 'Fitur Untuk Memanajemen Mahasiswa Prodi Sistem Informasi';
-        return view('developer.mahasiswa.si',$data ,compact('mahasiswa','ti','si','rpl','mi','ka','prodi','kelas'));
-        // echo "Halo !";
-    }
+    // public function sisteminformasi()
+    // {
+    //     $mahasiswa = Mahasiswa::all();
+    //     $prodi = Prodi::all();
+    //     $kelas = Kelas::all();
+    //     $kelas = $tag->posts()->latest()->get();
+    //     $ti = Mahasiswa::where('prodi_id', 'like', '1')->get();
+    //     $si = Mahasiswa::where('prodi_id', 'like', '2')->get();
+    //     $rpl = Mahasiswa::where('prodi_id', 'like', '3')->get();
+    //     $mi = Mahasiswa::where('prodi_id', 'like', '4')->get();
+    //     $ka = Mahasiswa::where('prodi_id', 'like', '5')->get();
+    //     $data['title'] = 'Manajemen Mahasiswa Prodi Sistem Informasi';
+    //     $data['desc'] = 'Fitur Untuk Memanajemen Mahasiswa Prodi Sistem Informasi';
+    //     return view('developer.mahasiswa.si',$data ,compact('mahasiswa','ti','si','rpl','mi','ka','prodi','kelas'));
+    //     // echo "Halo !";
+    // }
 
     // public function mahasiswa_export()
 	// {
@@ -188,7 +193,7 @@ class MahasiswaController extends Controller
         }
         
         $mahasiswa->prodi_id        = $request->prodi_id;
-        $mahasiswa->kelas_id        = $request->kelas_id;
+        // $mahasiswa->kelas_id        = $request->kelas_id;
         $mahasiswa->akun_id         = $request->akun_id;
         $mahasiswa->nim             = $request->nim;
         $mahasiswa->nama_lengkap    = $request->nama_lengkap;
@@ -199,6 +204,8 @@ class MahasiswaController extends Controller
         $mahasiswa->email           = $request->email;
         $mahasiswa->password        = Hash::make($request->password);
         $mahasiswa->save();
+
+        
 
         return redirect('/mahasiswa/index')->with('success', 'Post added successfully');
     }

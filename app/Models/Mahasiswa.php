@@ -54,7 +54,7 @@ class Mahasiswa extends Authenticatable
 
     public function kelas()
     {
-        return $this->belongsTo(Kelas::class);
+        return $this->belongsToMany(Kelas::class);
     }
 
     public function matakuliah()

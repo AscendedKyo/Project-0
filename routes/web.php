@@ -120,7 +120,11 @@ Route::middleware(['auth', 'user-access:Developer'])->group(function () {
     Route::resource('/developer/matakuliah', App\Http\Controllers\Developer\MataKuliahController::class);
     Route::resource('/developer/jadwalkuliah', App\Http\Controllers\Developer\JadwalKuliahController::class);
     Route::resource('/developer/absenmahasiswa', App\Http\Controllers\Developer\AbsenMahasiswaController::class);
-
+    Route::resource('/developer/gedung', App\Http\Controllers\Developer\GedungController::class);
+    Route::resource('/developer/inventaris', App\Http\Controllers\Developer\InventarisController::class);
+    
     Route::get('/developer/absen/{jadwalkuliah:slug}', [App\Http\Controllers\Developer\JadwalKuliahController::class, 'absen'])->name('index');
+    Route::get('/developer/inventaris-barang', [App\Http\Controllers\Developer\InventarisController::class, 'barang'])->name('inventaris-barang');
+    Route::get('/developer/inventaris-ruangan', [App\Http\Controllers\Developer\InventarisController::class, 'ruangan'])->name('inventaris-ruangan');
     // Route::get('/developer/absen/{jadwalkuliah:slug}', [App\Http\Controllers\Developer\JadwalKuliahController::class, 'absen'])->name('index');
 });

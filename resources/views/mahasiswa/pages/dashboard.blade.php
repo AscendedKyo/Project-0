@@ -31,8 +31,8 @@
           </select>
         </div>
         <div class="mb-3 col-md-6 divider divider-left">
-          <label for="kelasm" class="form-label divider-text">Kelas</label>
-          <select class="select2 form-select" name="kelasm" id="kelasm">
+          <label for="kelas" class="form-label divider-text">Kelas</label>
+          <select class="select2 form-select" name="kelas[]" id="kelas">
             <option selected value="">Pilih Kelas</option>
             @foreach( $kelas as $class )
             <option value="{{ $class->id }}">{{ $class->nama_kelas }}</option>

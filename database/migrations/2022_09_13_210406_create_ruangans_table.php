@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('ruangans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('gedung_id')->default(0);
             $table->string('nama_ruangan');
             $table->string('kode_ruangan');
             $table->string('lokasi_ruangan');

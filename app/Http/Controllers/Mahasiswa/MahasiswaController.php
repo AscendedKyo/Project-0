@@ -37,6 +37,7 @@ class MahasiswaController extends Controller
         $data['subtitle'] = 'Index';
         $data['desc'] = 'Selamat Datang '. Auth::guard('mahasiswa')->user()->name;
         return view('mahasiswa.pages.dashboard',$data, compact('mahasiswa', 'now', 'prodi', 'kelas', 'jadwalkuliah','jadwaltoday' , 'today'));
+        
     }
 
     public function absen()
@@ -58,15 +59,15 @@ class MahasiswaController extends Controller
         return view('mahasiswa.pages.absen.index',$data, compact('mahasiswa','limiterdate', 'limiterstart', 'limiterend','now', 'prodi', 'kelas', 'absenmahasiswa', 'jadwalkuliah', 'matakuliah'));
     }
 
-    public function profile(Prodi $prodi)
+    public function profile()
     {
-        $mahasiswa = Mahasiswa::all();
+        $mahasiswas = Mahasiswa::find(Auth::id());
         $prodi = Prodi::all();
         $kelas = Kelas::all();
         $data['title'] = 'Dashboard';
         $data['subtitle'] = 'Profile';
         $data['desc'] = 'Selamat Datang '. Auth::guard('mahasiswa')->user()->name;
-        return view('mahasiswa.pages.profile.index',$data, compact('mahasiswa', 'prodi', 'kelas'));
+        return view('mahasiswa.pages.profile.index',$data, compact('mahasiswas', 'prodi', 'kelas'));
     }
 
     public function updatedata(Request $request)
@@ -101,9 +102,6 @@ class MahasiswaController extends Controller
         }
         
         Mahasiswa::whereId(auth()->guard('mahasiswa')->user()->id)->update([
-            'prodi_id' => $request->prodi_id,
-            'kelas_id' => $request->kelas_id,
-            'nim' => $request->nim,
             'agama' => $request->agama,
             'jenis_kelamin' => $request->jenis_kelamin,
             'tempat_lahir' => $request->tempat_lahir,
@@ -142,7 +140,7 @@ class MahasiswaController extends Controller
         $mahasiswa->nim = $request->nim;
         $mahasiswa->save();
 
-        $mahasiswa->prodi()->attach($request->prodi); 
+        $mahasiswa->kelas()->attach($request->kelas); 
         // $mahasiswa->kelas()->attach($request->kelas); 
         
 

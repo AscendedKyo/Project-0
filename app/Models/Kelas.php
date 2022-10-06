@@ -13,9 +13,9 @@ class Kelas extends Model
     protected $fillable = ['nama_kelas', 'kode_kelas'];
     protected $guarded = [];
     
-    public function mahasiswa()
+    public function mahasiswas()
     {
-        return $this->hasMany(Mahasiswa::class);
+        return $this->belongsToMany(Mahasiswa::class);
     }
     public function absenmahasiswa()
     {

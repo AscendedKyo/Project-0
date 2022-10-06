@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Developer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Ruangan;
+use App\Models\Inventaris;
+use App\Models\Barang;
 
 class RuanganController extends Controller
 {
@@ -60,7 +62,12 @@ class RuanganController extends Controller
      */
     public function show($id)
     {
-        //
+        $ruangan = Ruangan::all();
+        $inven = Inventaris::all();
+        $barang = Barang::all();
+        $data['title'] = 'Manajemen Ruangan';
+        $data['desc'] = 'Fitur Untuk Menambahkan Ruangan';
+        return view('developer.inventaris.ruangan.index',$data ,compact('inven','ruangan'));
     }
 
     /**

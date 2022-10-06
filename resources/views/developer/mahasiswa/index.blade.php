@@ -9,7 +9,7 @@
         <div class="row">
                 <div class="col-12">
                     <a href="#" class="btn btn-secondary btn-icon icon-left">
-                        <i class="fas fa-newspaper"></i>  Semua Prodi <span class="badge bg-transparent">{{ $mahasiswa->count(); }}</span>
+                        <i class="fas fa-newspaper"></i>  Semua Prodi <span class="badge bg-transparent">{{ $mahasiswas->count(); }}</span>
                     </a>
                     <a href="#" class="btn btn-outline-primary btn-icon icon-left">
                         <i class="fas fa-newspaper"></i>  Teknik Informatika <span class="badge bg-transparent">{{ $ti->count(); }}</span>
@@ -62,13 +62,16 @@
             </thead>
             <tbody>
                 <?php $no = 1 ?>
-                @foreach ($mahasiswa as $key => $item)
+                @foreach ($mahasiswas as $key => $item)
                 <tr>
                     <td>{{ ++$key }}</td>
                     <td>{{ $item->nim }}</td>
                     <td>{{ $item->name }}</td>
                     <td>{{ $item->prodi->nama_prodi }}</td>
-                    <td>{{ $item->kelas->nama_kelas }}</td>
+                    @foreach($mahasiswa->kelas as $kelas)
+                    <td>{{ $kelas->nama_kelas }}</td>
+                    @endforeach
+                    <td>{{ $item->kelas }}</td>
                     <td>{{ $item->email }}</td>
                     <td>{{ $item->nomor_telepon }}</td>
                     <td>{{ Carbon\Carbon::parse($item->created_at)->diffForHumans()}}</td>
